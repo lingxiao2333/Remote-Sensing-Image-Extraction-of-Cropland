@@ -1,18 +1,7 @@
 from tensorflow.keras.callbacks import ModelCheckpoint,EarlyStopping,LearningRateScheduler,ReduceLROnPlateau
 from tensorflow.keras.optimizers import Adam,SGD
-from model.Deeplabv3.DeeplabV3_plus import deeplabv3_plus
-from model.Deeplabv3.deeplabv3plus import Deeplabv3
-from model.ACFNet.ACFNet import ACFNet
-from model.ACFNet.deepACFNet import DeepACFNet
-from danet import danet_resnet101
 from data_process.generator import get_train_val,generateData,generateValidData
 from loss.focal_loss import multi_category_focal_loss1
-from ACFResnet101 import acf_resnet101
-from ACFResnet34 import acf_resnet34
-from CAAResnet50 import caa_resnet50
-from CFAMNet import cfam_resnet
-from DAUNET import da_unet
-from UNet import unet
 import tensorflow.keras.backend as K
 import tensorflow as tf
 from dice_loss import dice_loss
@@ -78,7 +67,6 @@ def poly_decay(epoch):
 def train(dir): 
     modelcheck = ModelCheckpoint(dir ,monitor='val_accuracy',save_best_only=True,mode='max',verbose=1) 
     # callable = [modelcheck]
-     # 是否需要早停，当val_loss一直不下降的时候意味着模型基本训练完毕，可以停止
     es = EarlyStopping(
                         monitor='val_accuracy', 
                         min_delta=0, 
