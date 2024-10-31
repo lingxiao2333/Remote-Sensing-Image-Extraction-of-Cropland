@@ -97,8 +97,6 @@ def train(dir, model_name, size, n_label, EPOCHS, BS, lr, decay, train_path, val
     #     val_x, val_y = generateAllData(val_path,size)
     #     H = model.fit(x=train_x, y=train_y, batch_size=BS, epochs=EPOCHS, verbose=1, callbacks=callable,
     #                   validation_data=(val_x,val_y), shuffle=True)
-    save_txt(dir + 'txts/', model_name, H)
-    visual(dir + 'curves/', model_name, H)
     #  训练总时间
     end_time = datetime.datetime.now()
     log_time = "训练总时间: " + str((end_time - start_time).seconds / 60) + "m"
@@ -113,5 +111,11 @@ valPath = rootPath + 'val/'
 modelSaveDir = rootPath + 'save_models/'
 modelName = 'seresUNet***'
 if not os.path.exists(modelSaveDir): os.mkdir(modelSaveDir)
+size = 256
+classNum = 3
+epochs = 150
+batchsize = 8
+learningRate = 0.001
+decay = 0.00
 # 训练
 H = train(modelSaveDir,modelName,size,classNum,epochs,batchsize,learningRate,decay,trainPath,valPath)
