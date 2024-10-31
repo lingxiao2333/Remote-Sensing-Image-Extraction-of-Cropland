@@ -6,7 +6,7 @@ from loss_gifhub import dice_loss
 from cosine_decay import WarmUpCosineDecayScheduler
 import os
 import datetime
-import time
+from SERESUNET import SE_ResUnet
 
 n_label = 3
 # # ['林草地', '耕地', '其他用地']
