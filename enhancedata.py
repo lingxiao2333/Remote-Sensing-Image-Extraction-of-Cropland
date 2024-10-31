@@ -125,8 +125,8 @@ def data_augment(img, label, count, augmentation_threshold=20):
 
 random.seed(42)
 
-image_folder = 'G:/newimage/DUIBI/3N/data_process/images/'
-label_folder = 'G:/newimage/DUIBI/3N/data_process/labels/'
+image_folder = 'G:/images/'
+label_folder = 'G:/labels/'
 
 # Get a list of image and label files
 image_files = os.listdir(image_folder)
@@ -164,20 +164,20 @@ def copy_files(source_folder, dest_folder, files):
 
 
 
-copy_files(image_folder, 'G:/newimage/DUIBI/3N/data_process/save_data/train/images/', train_images)
-copy_files(label_folder, 'G:/newimage/DUIBI/3N/data_process/save_data/train/labels/', train_labels)
-copy_files(image_folder, 'G:/newimage/DUIBI/3N/data_process/save_data/val/images/', val_images)
-copy_files(label_folder, 'G:/newimage/DUIBI/3N/data_process/save_data/val/labels/', val_labels)
-copy_files(image_folder, 'G:/newimage/DUIBI/3N/data_process/save_data/test/images/', test_images)
-copy_files(label_folder, 'G:/newimage/DUIBI/3N/data_process/save_data/test/labels/', test_labels)
+copy_files(image_folder, 'G:/save_data/train/images/', train_images)
+copy_files(label_folder, 'G:/save_data/train/labels/', train_labels)
+copy_files(image_folder, 'G:/save_data/val/images/', val_images)
+copy_files(label_folder, 'G:/save_data/val/labels/', val_labels)
+copy_files(image_folder, 'G:/save_data/test/images/', test_images)
+copy_files(label_folder, 'G:/save_data/test/labels/', test_labels)
 
 
-train_image_files = os.listdir('G:/newimage/DUIBI/3N/data_process/save_data/train/' + 'images/')
-train_label_files = os.listdir('G:/newimage/DUIBI/3N/data_process/save_data/train/' + 'labels/')
+train_image_files = os.listdir('G:/save_data/train/' + 'images/')
+train_label_files = os.listdir('G:/save_data/train/' + 'labels/')
 
 for i in tqdm(range(len(train_image_files))):
-    image_path = os.path.join('G:/newimage/DUIBI/3N/data_process/save_data/train/' + 'images/', train_image_files[i])
-    label_path = os.path.join('G:/newimage/DUIBI/3N/data_process/save_data/train/' + 'labels/', train_label_files[i])
+    image_path = os.path.join('G:/save_data/train/' + 'images/', train_image_files[i])
+    label_path = os.path.join('G:/save_data/train/' + 'labels/', train_label_files[i])
 
     image = cv2.imread(image_path)
     label = cv2.imread(label_path, cv2.IMREAD_GRAYSCALE)
@@ -191,8 +191,8 @@ for i in tqdm(range(len(train_image_files))):
         augmented_image, augmented_label = data_augment(image, label, count)
 
         if augmented_label is not None and augmented_label.size != 0:
-            augmented_image_path = os.path.join('G:/newimage/DUIBI/3N/data_process/save_data/train/' + 'images/',f'{count}_augmented_{i}.tif')
-            augmented_label_path = os.path.join('G:/newimage/DUIBI/3N/data_process/save_data/train/' + 'labels/',f'{count}_augmented_{i}.tif')
+            augmented_image_path = os.path.join('G:/save_data/train/' + 'images/',f'{count}_augmented_{i}.tif')
+            augmented_label_path = os.path.join('G:/save_data/train/' + 'labels/',f'{count}_augmented_{i}.tif')
 
             cv2.imwrite(augmented_image_path, augmented_image)
             cv2.imwrite(augmented_label_path, augmented_label)
