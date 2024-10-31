@@ -1,17 +1,9 @@
 from tensorflow.keras.callbacks import ModelCheckpoint,EarlyStopping,LearningRateScheduler,ReduceLROnPlateau
 from tensorflow.keras.optimizers import Adam,SGD
-from data_process.generator import get_train_val,generateData,generateValidData
-from loss.focal_loss import multi_category_focal_loss1
+from generator_github import generateData,generateAllData
 import tensorflow.keras.backend as K
-import tensorflow as tf
-from dice_loss import dice_loss
-from loss.bce_loss import bce_dice_loss
-from lovasz_losses import lovasz_softmax
-from tensorflow.keras.losses import categorical_crossentropy
-from loss1 import acfloss,acfloss2
-from WCCE import weighted_categorical_crossentropy
-import matplotlib.pyplot as plt
-import numpy as np
+from loss_gifhub import dice_loss
+from cosine_decay import WarmUpCosineDecayScheduler
 import os
 import datetime
 import time
@@ -21,10 +13,6 @@ n_label = 3
 classes = [2., 3., 4.]
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
-train_set,val_set = get_train_val(val_rate=0.25,num_rate=1)
-train_numb = len(train_set)  
-valid_numb = len(val_set)
 
 size = 256
 EPOCHS = 100
@@ -104,7 +92,7 @@ def train(dir, model_name, size, n_label, EPOCHS, BS, lr, decay, train_path, val
 
     return H
 
-rootPath = 'G:/save_data/'
+rootPath = 'H:e/d//save_data/'
 
 trainPath = rootPath + 'train/'
 valPath = rootPath + 'val/'
